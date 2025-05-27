@@ -1,76 +1,54 @@
 import streamlit as st
 import os
 
-def display_png(png_path):
-    """
-    Displays a PNG file in the Streamlit app.
+# Path to the folder containing images
+image_folder = "1"
 
-    Args:
-        png_path (str): The path to the PNG file.
-    """
-    st.image(png_path, use_container_width=True)
+# Get image filenames sorted
+images = sorted([img for img in os.listdir(image_folder) if img.lower().endswith(('.jpg', '.jpeg', '.png'))])
 
-def main():
-   
+# Set page layout
+st.set_page_config(layout="centered")
 
-    # Folder containing PNG files
-    png_folder = "pngs"
-    png_files = sorted([png for png in os.listdir(png_folder) if png.lower().endswith(".png")])
+# Custom styling
+st.markdown("""
+    <style>
+    .carousel-img {
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .center {
+        display: flex;
+        justify-content: center;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-    # Check if the folder exists
-    if not os.path.exists(png_folder):
-        st.error(f"Error: The folder '{png_folder}' does not exist. Please create it and put your PNG files there.")
-        return
+# Initialize index
+if "current_index" not in st.session_state:
+    st.session_state.current_index = 0
 
-    # Check if there are any PNG files in the folder
-    if not png_files:
-        st.error(f"Error: The folder '{png_folder}' is empty or contains no PNG files.")
-        return
+# Navigation controls
+col1, col2, col3 = st.columns([1, 6, 1])
 
-    # Initialize session state
-    if "png_index" not in st.session_state:
-        st.session_state.png_index = 0
-    if "left_clicked" not in st.session_state:  # Add this
-        st.session_state.left_clicked = False
-    if "right_clicked" not in st.session_state: # Add this
-        st.session_state.right_clicked = False
+with col1:
+    if st.button("◀️", use_container_width=True):
+        if st.session_state.current_index > 0:
+            st.session_state.current_index -= 1
 
-    # Get the current PNG file path
-    current_png = png_files[st.session_state.png_index]
-    png_path = os.path.join(png_folder, current_png)
+with col3:
+    if st.button("▶️", use_container_width=True):
+        if st.session_state.current_index < len(images) - 1:
+            st.session_state.current_index += 1
 
-    # Display the current PNG
-    display_png(png_path)
+# Display the current image
+current_image = os.path.join(image_folder, images[st.session_state.current_index])
+with col2:
+    st.image(current_image, use_container_width=True, caption=images[st.session_state.current_index])
 
-    # Create columns for clickable areas
-    left_col, right_col = st.columns(2)
-
-    # Use st.container() and st.markdown() to create clickable areas
-    with left_col:
-        if st.markdown("<div style='height: 600px;'></div>", unsafe_allow_html=True):
-            if st.session_state.left_clicked: # Only change if left is clicked
-                st.session_state.left_clicked = False #reset
-                if st.session_state.png_index > 0:
-                    st.session_state.png_index -= 1
-                    st.rerun()
-
-    with right_col:
-        if st.markdown("<div style='height: 600px;'></div>", unsafe_allow_html=True):
-            if st.session_state.right_clicked: # Only change if right is clicked
-                st.session_state.right_clicked = False #reset
-                if st.session_state.png_index < len(png_files) - 1:
-                    st.session_state.png_index += 1
-                    st.rerun()
-
-    left_col, right_col = st.columns(2)
-    if left_col.button("prev"):
-        if st.session_state.png_index > 0:
-                st.session_state.png_index -= 1
-                st.rerun()
-    if right_col.button("next"):
-        if st.session_state.png_index < len(png_files) - 1:
-                st.session_state.png_index += 1
-                st.rerun()
-
-if __name__ == "__main__":
-    main()
+# Optional counter
+st.markdown(
+    f"<p style='text-align:center; color:white;'>Image {st.session_state.current_index + 1} of {len(images)}</p>",
+    unsafe_allow_html=True
+)
