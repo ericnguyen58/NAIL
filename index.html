@@ -2143,6 +2143,24 @@ function startFirebaseSync() {
     return;
   }
 
+  _db.ref('staff').once('value').then(snap => {
+    if (snap.val() === null) {
+      // Firebase empty — push local data up
+      fbSet('staff', getStaff());
+    }
+  });
+
+  _db.ref('services').once('value').then(snap => {
+    if (snap.val() === null) {
+      // Firebase empty — push local data up
+      fbSet('services', getServices());
+    }
+  });
+
+  _db.ref('pw').once('value').then(snap => {
+    if (snap.val() === null) fbSet('pw', getPw());
+  });
+
   _db.ref('staff').on('value', snap => {
     const val = snap.val();
     if (val !== null) {
