@@ -1362,6 +1362,18 @@
 
       <div id="staffSaveBanner" class="admin-save-banner" style="margin-top:16px">Saved!</div>
 
+      <!-- ── DATA SYNC ── -->
+      <div class="admin-card" style="margin-top:24px">
+        <div class="admin-card-title">Sync Data to Another Device</div>
+        <p style="font-size:.9rem;color:var(--text-light);margin-bottom:16px;">Export your staff, QR codes, and services to a file — then import it on another device.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="admin-btn-primary" onclick="exportData()">⬇ Export Data</button>
+          <button class="admin-btn-ghost" onclick="document.getElementById('importFileInput').click()">⬆ Import Data</button>
+          <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importData(this)"/>
+        </div>
+        <div id="importMsg" style="display:none;font-size:.9rem;margin-top:12px;"></div>
+      </div>
+
       <div style="text-align:center;margin-top:32px">
         <button class="admin-btn-ghost" onclick="lockAdmin()">Lock &amp; Exit Admin</button>
       </div>
@@ -1992,6 +2004,56 @@ function doConfirm() {
 document.getElementById('confirmBackdrop').addEventListener('click', e => {
   if (e.target === document.getElementById('confirmBackdrop')) closeConfirm();
 });
+
+/* ══════════════════════════════════════
+   EXPORT / IMPORT
+══════════════════════════════════════ */
+function exportData() {
+  const payload = {
+    version: 1,
+    exported: new Date().toISOString(),
+    staff:    getStaff(),
+    services: getServices(),
+    pw:       getPw()
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'alo-data-' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const msg = document.getElementById('importMsg');
+    try {
+      const payload = JSON.parse(e.target.result);
+      if (!payload.version || !Array.isArray(payload.staff) || !payload.services) {
+        throw new Error('Unrecognized file format.');
+      }
+      saveStaffList(payload.staff);
+      saveServices(payload.services);
+      if (payload.pw) localStorage.setItem(PW_KEY, payload.pw);
+      renderAll();
+      renderStaffGrid();
+      msg.style.display  = 'block';
+      msg.style.color    = 'var(--gold)';
+      msg.textContent    = 'Import successful! Data is now synced on this device.';
+    } catch(err) {
+      msg.style.display  = 'block';
+      msg.style.color    = '#c0392b';
+      msg.textContent    = 'Import failed: ' + err.message;
+    }
+    input.value = '';
+    setTimeout(() => { msg.style.display = 'none'; }, 4000);
+  };
+  reader.readAsText(file);
+}
 
 /* ══════════════════════════════════════
    INIT
