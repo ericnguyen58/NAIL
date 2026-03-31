@@ -926,6 +926,7 @@
     .svc-manager-title { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:600; color:var(--text-dark); }
     .svc-item-row { display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid rgba(201,169,110,.15); flex-wrap:wrap; }
     .svc-item-row:last-child { border-bottom:none; }
+    .svc-item-actions { display:flex; gap:8px; margin-left:auto; flex-shrink:0; }
     .svc-item-name { flex:1; font-size:1rem; font-weight:500; color:var(--text-dark); min-width:120px; }
     .svc-item-prices { display:flex; flex-direction:column; gap:4px; flex:2; }
     .svc-price-row { display:flex; gap:8px; align-items:center; }
@@ -1364,14 +1365,11 @@
 
       <!-- ── DATA SYNC ── -->
       <div class="admin-card" style="margin-top:24px">
-        <div class="admin-card-title">Sync Data to Another Device</div>
-        <p style="font-size:.9rem;color:var(--text-light);margin-bottom:16px;">Export your staff, QR codes, and services to a file — then import it on another device.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <button class="admin-btn-primary" onclick="exportData()">⬇ Export Data</button>
-          <button class="admin-btn-ghost" onclick="document.getElementById('importFileInput').click()">⬆ Import Data</button>
-          <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importData(this)"/>
+        <div class="admin-card-title">Live Device Sync</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:4px;">
+          <span id="syncDot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaa;flex-shrink:0;"></span>
+          <span id="syncLabel" style="font-size:.9rem;color:var(--text-light);">Checking connection…</span>
         </div>
-        <div id="importMsg" style="display:none;font-size:.9rem;margin-top:12px;"></div>
       </div>
 
       <div style="text-align:center;margin-top:32px">
@@ -1417,6 +1415,10 @@
   </div>
 </div>
 
+<!-- ════ FIREBASE SDK ════ -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+
 <script>
 /* ══════════════════════════════════════
    DEFAULT SERVICE DATA
@@ -1453,17 +1455,45 @@ const DEFAULT_SERVICES = {
 };
 
 /* ══════════════════════════════════════
-   STORAGE
+   FIREBASE CONFIG
+   → Replace placeholder values with your
+     own from the Firebase console.
+══════════════════════════════════════ */
+const FIREBASE_CONFIG = {
+  apiKey:            "REPLACE_apiKey",
+  authDomain:        "REPLACE_authDomain",
+  databaseURL:       "REPLACE_databaseURL",
+  projectId:         "REPLACE_projectId",
+  storageBucket:     "REPLACE_storageBucket",
+  messagingSenderId: "REPLACE_messagingSenderId",
+  appId:             "REPLACE_appId"
+};
+
+let _db = null;
+(function initFirebase() {
+  try {
+    if (Object.values(FIREBASE_CONFIG).some(v => v.startsWith('REPLACE_'))) return;
+    firebase.initializeApp(FIREBASE_CONFIG);
+    _db = firebase.database();
+  } catch(e) { console.warn('Firebase init failed:', e); }
+})();
+
+function fbRef(path) { return _db ? _db.ref(path) : null; }
+function fbSet(path, value) { const r = fbRef(path); if (r) r.set(value); }
+
+/* ══════════════════════════════════════
+   STORAGE  (localStorage + Firebase)
 ══════════════════════════════════════ */
 const SVC_KEY   = 'alo_services_v1';
 const STAFF_KEY = 'alo_staff_v1';
 const PW_KEY    = 'alo_admin_pw';
 
 function getServices()      { return JSON.parse(localStorage.getItem(SVC_KEY) || 'null') || JSON.parse(JSON.stringify(DEFAULT_SERVICES)); }
-function saveServices(data) { localStorage.setItem(SVC_KEY, JSON.stringify(data)); }
+function saveServices(data) { localStorage.setItem(SVC_KEY, JSON.stringify(data)); fbSet('services', data); }
 function getStaff()         { return JSON.parse(localStorage.getItem(STAFF_KEY) || '[]'); }
-function saveStaffList(arr) { localStorage.setItem(STAFF_KEY, JSON.stringify(arr)); }
+function saveStaffList(arr) { localStorage.setItem(STAFF_KEY, JSON.stringify(arr)); fbSet('staff', arr); }
 function getPw()            { return localStorage.getItem(PW_KEY) || 'alo2024'; }
+function savePw(pw)         { localStorage.setItem(PW_KEY, pw); fbSet('pw', pw); }
 
 /* ══════════════════════════════════════
    MODAL DATA (built-in rich content)
@@ -1662,10 +1692,32 @@ function renderSvcPanel(cat, svc) {
         ).join('');
         html += `<span class="svc-item-name">${s.name}</span><div class="svc-item-prices">${priceInputs}</div>`;
       }
-      html += `<button class="admin-btn-sm danger" onclick="removeService('${cat}',${idx})">Remove</button>
+      html += `<div class="svc-item-actions">
+        <button class="admin-btn-sm" onclick="openEditForm('${cat}',${idx})">Edit</button>
+        <button class="admin-btn-sm danger" onclick="removeService('${cat}',${idx})">Remove</button>
+      </div>
       </div>`;
     });
   }
+
+  // edit form (shared, populated dynamically)
+  html += `<div class="svc-add-form" id="editForm_${cat}">
+    <div class="admin-card-title" style="font-size:1.1rem;margin-bottom:14px;">Edit ${cat === 'addons' ? 'Add-On' : 'Service'}</div>
+    <input type="hidden" id="ef_${cat}_idx"/>
+    ${cat !== 'addons' ? `<div class="admin-field" style="margin-bottom:10px"><label class="admin-label">Name</label><input id="ef_${cat}_name" class="admin-input"/></div>
+    <div class="admin-field" style="margin-bottom:10px"><label class="admin-label">Short Description</label><input id="ef_${cat}_desc" class="admin-input"/></div>` : ''}
+    ${cat === 'addons' ? `<div class="admin-field" style="margin-bottom:10px"><label class="admin-label">Label</label><input id="ef_${cat}_name" class="admin-input"/></div>` : ''}
+    ${cat === 'enhancements'
+      ? `<div class="admin-label" style="margin-bottom:8px;margin-top:4px;">Price Rows</div>
+         <div id="ef_${cat}_priceList" class="svc-add-price-list"></div>
+         <button class="admin-btn-sm" style="margin-bottom:12px" onclick="addEditPriceRow('${cat}')">+ Add Row</button>`
+      : `<div class="admin-field" style="margin-bottom:10px"><label class="admin-label">Price</label><input id="ef_${cat}_price" class="admin-input"/></div>`}
+    <div class="admin-form-actions">
+      <button class="admin-btn-primary" onclick="confirmEditService('${cat}')">Save</button>
+      <button class="admin-btn-ghost" onclick="closeEditForm('${cat}')">Cancel</button>
+    </div>
+    <div id="ef_${cat}_err" class="admin-error" style="display:none;margin-top:10px">Please fill in the required fields.</div>
+  </div>`;
 
   // add form
   html += `<div class="svc-add-form" id="addForm_${cat}">
@@ -1760,6 +1812,74 @@ function confirmAddService(cat) {
   flashBanner('saveBanner_' + cat);
 }
 
+function openEditForm(cat, idx) {
+  closeAddForm(cat);
+  const svc = getServices();
+  const s   = svc[cat][idx];
+  document.getElementById('ef_' + cat + '_idx').value = idx;
+  document.getElementById('ef_' + cat + '_name').value = (cat === 'addons' ? s.label : s.name) || '';
+  if (cat !== 'addons') document.getElementById('ef_' + cat + '_desc').value = s.desc || '';
+  if (cat === 'enhancements') {
+    const list = document.getElementById('ef_' + cat + '_priceList');
+    list.innerHTML = s.items.map(it =>
+      `<div class="svc-add-price-entry">
+        <input class="admin-input" placeholder="Label" value="${it.label}"/>
+        <input class="admin-input" placeholder="Price" value="${it.price}"/>
+        <button onclick="this.closest('.svc-add-price-entry').remove()">✕</button>
+      </div>`
+    ).join('');
+  } else {
+    document.getElementById('ef_' + cat + '_price').value = s.price || '';
+  }
+  document.getElementById('ef_' + cat + '_err').style.display = 'none';
+  document.getElementById('editForm_' + cat).classList.add('open');
+}
+
+function closeEditForm(cat) {
+  document.getElementById('editForm_' + cat).classList.remove('open');
+}
+
+function addEditPriceRow(cat) {
+  const list = document.getElementById('ef_' + cat + '_priceList');
+  const row  = document.createElement('div');
+  row.className = 'svc-add-price-entry';
+  row.innerHTML = `<input class="admin-input" placeholder="Label"/><input class="admin-input" placeholder="Price"/><button onclick="this.closest('.svc-add-price-entry').remove()">✕</button>`;
+  list.appendChild(row);
+}
+
+function confirmEditService(cat) {
+  const idx    = parseInt(document.getElementById('ef_' + cat + '_idx').value);
+  const nameEl = document.getElementById('ef_' + cat + '_name');
+  const errEl  = document.getElementById('ef_' + cat + '_err');
+  const name   = nameEl ? nameEl.value.trim() : '';
+  if (!name) { errEl.style.display = 'block'; return; }
+  errEl.style.display = 'none';
+
+  const svc = getServices();
+  const s   = svc[cat][idx];
+
+  if (cat === 'enhancements') {
+    s.name = name;
+    s.desc = document.getElementById('ef_' + cat + '_desc').value.trim();
+    const rows = [...document.querySelectorAll(`#ef_${cat}_priceList .svc-add-price-entry`)];
+    s.items = rows.map(r => ({ label: r.children[0].value.trim() || 'Price', price: r.children[1].value.trim() || '$0' })).filter(r => r.label);
+    if (!s.items.length) s.items = [{ label: 'Price', price: '$0' }];
+  } else if (cat === 'manicure' || cat === 'pedicure') {
+    s.name  = name;
+    s.desc  = document.getElementById('ef_' + cat + '_desc').value.trim();
+    s.price = document.getElementById('ef_' + cat + '_price').value.trim() || '$0';
+  } else {
+    s.label = name;
+    s.price = document.getElementById('ef_' + cat + '_price').value.trim() || '$0';
+  }
+
+  saveServices(svc);
+  renderAll();
+  renderSvcPanel(cat, svc);
+  closeEditForm(cat);
+  flashBanner('saveBanner_' + cat);
+}
+
 function flashBanner(id) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -1798,7 +1918,7 @@ function changePw() {
   const msg = document.getElementById('pwChangeMsg');
   if (!np) { msg.style.display='block'; msg.style.color='#b03030'; msg.textContent='Password cannot be empty.'; return; }
   if (np !== cp) { msg.style.display='block'; msg.style.color='#b03030'; msg.textContent='Passwords do not match.'; return; }
-  localStorage.setItem(PW_KEY, np);
+  savePw(np);
   document.getElementById('newPw').value = '';
   document.getElementById('confirmPw').value = '';
   msg.style.display='block'; msg.style.color='var(--gold-dark)'; msg.textContent='Password updated.';
@@ -2006,59 +2126,53 @@ document.getElementById('confirmBackdrop').addEventListener('click', e => {
 });
 
 /* ══════════════════════════════════════
-   EXPORT / IMPORT
+   FIREBASE REAL-TIME LISTENERS
 ══════════════════════════════════════ */
-function exportData() {
-  const payload = {
-    version: 1,
-    exported: new Date().toISOString(),
-    staff:    getStaff(),
-    services: getServices(),
-    pw:       getPw()
-  };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = 'alo-data-' + new Date().toISOString().slice(0,10) + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
+function startFirebaseSync() {
+  if (!_db) {
+    setSyncStatus(false);
+    return;
+  }
+
+  _db.ref('staff').on('value', snap => {
+    const val = snap.val();
+    if (val !== null) {
+      localStorage.setItem(STAFF_KEY, JSON.stringify(val));
+      renderStaffGrid();
+    }
+  });
+
+  _db.ref('services').on('value', snap => {
+    const val = snap.val();
+    if (val !== null) {
+      localStorage.setItem(SVC_KEY, JSON.stringify(val));
+      renderAll();
+    }
+  });
+
+  _db.ref('pw').on('value', snap => {
+    const val = snap.val();
+    if (val !== null) localStorage.setItem(PW_KEY, val);
+  });
+
+  _db.ref('.info/connected').on('value', snap => {
+    setSyncStatus(snap.val() === true);
+  });
 }
 
-function importData(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const msg = document.getElementById('importMsg');
-    try {
-      const payload = JSON.parse(e.target.result);
-      if (!payload.version || !Array.isArray(payload.staff) || !payload.services) {
-        throw new Error('Unrecognized file format.');
-      }
-      saveStaffList(payload.staff);
-      saveServices(payload.services);
-      if (payload.pw) localStorage.setItem(PW_KEY, payload.pw);
-      renderAll();
-      renderStaffGrid();
-      msg.style.display  = 'block';
-      msg.style.color    = 'var(--gold)';
-      msg.textContent    = 'Import successful! Data is now synced on this device.';
-    } catch(err) {
-      msg.style.display  = 'block';
-      msg.style.color    = '#c0392b';
-      msg.textContent    = 'Import failed: ' + err.message;
-    }
-    input.value = '';
-    setTimeout(() => { msg.style.display = 'none'; }, 4000);
-  };
-  reader.readAsText(file);
+function setSyncStatus(connected) {
+  const dot   = document.getElementById('syncDot');
+  const label = document.getElementById('syncLabel');
+  if (!dot || !label) return;
+  dot.style.background = connected ? '#4caf50' : '#aaa';
+  label.textContent    = connected ? 'Live sync active — all devices stay in sync automatically.' : 'Offline — changes will sync when reconnected.';
 }
 
 /* ══════════════════════════════════════
    INIT
 ══════════════════════════════════════ */
 renderAll();
+startFirebaseSync();
 </script>
 
 </body>
