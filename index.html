@@ -321,12 +321,73 @@
     footer {
       background: #1a0f08;
       color: rgba(255,255,255,.55);
-      text-align: center;
-      padding: 44px 20px;
       font-size: .95rem;
-      letter-spacing: .08em;
+      letter-spacing: .04em;
     }
-    footer strong { color: var(--gold); font-weight: 400; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; }
+    .footer-top {
+      max-width: 1060px; margin: 0 auto;
+      padding: 60px 36px 48px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 48px;
+      border-bottom: 1px solid rgba(201,169,110,.15);
+    }
+    .footer-col-title {
+      font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); opacity: .8; margin-bottom: 18px; font-weight: 500;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 300;
+      color: var(--gold-light); line-height: 1.1;
+      margin-bottom: 10px;
+    }
+    .footer-brand em { font-style: italic; color: #fff; }
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 1rem;
+      color: rgba(255,255,255,.45); margin-bottom: 20px; line-height: 1.6;
+    }
+    .footer-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .footer-badge {
+      border: 1px solid rgba(201,169,110,.3);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: .75rem; letter-spacing: .08em;
+      color: rgba(255,255,255,.5);
+    }
+    .footer-info-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      margin-bottom: 16px; line-height: 1.55;
+    }
+    .footer-info-icon {
+      width: 32px; height: 32px; flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(201,169,110,.1);
+      border: 1px solid rgba(201,169,110,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem;
+    }
+    .footer-info-text { font-size: .9rem; color: rgba(255,255,255,.55); }
+    .footer-info-text a {
+      color: var(--gold-light); text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-info-text a:hover { color: #fff; }
+    .footer-hours-grid {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 5px 16px; font-size: .88rem;
+    }
+    .footer-hours-day { color: rgba(255,255,255,.45); white-space: nowrap; }
+    .footer-hours-time { color: rgba(255,255,255,.7); }
+    .footer-hours-time.closed { color: rgba(255,255,255,.3); font-style: italic; }
+    .footer-bottom {
+      text-align: center; padding: 20px 36px;
+      font-size: .78rem; letter-spacing: .08em;
+      color: rgba(255,255,255,.25);
+    }
+    @media (max-width: 760px) {
+      .footer-top { grid-template-columns: 1fr; gap: 36px; padding: 44px 24px 36px; }
+    }
 
     /* ─── SEPARATOR ─── */
     .section-sep {
@@ -1204,8 +1265,70 @@
 </div><!-- /page -->
 
 <footer>
-  <strong>ALO Nail Lounge</strong><br/>
-  <span style="margin-top:8px; display:block;">Where luxury meets care &nbsp;•&nbsp; Walk-ins welcome &nbsp;•&nbsp; Appointments preferred</span>
+  <div class="footer-top">
+
+    <!-- Brand -->
+    <div>
+      <div class="footer-brand">ALO <em>Nail Lounge</em></div>
+      <div class="footer-tagline">Where luxury meets care —<br/>for couples, families &amp; every occasion.</div>
+      <div class="footer-badges">
+        <span class="footer-badge">✦ Credit Cards Accepted</span>
+        <span class="footer-badge">✦ Restroom Available</span>
+        <span class="footer-badge">✦ Walk-ins Welcome</span>
+      </div>
+    </div>
+
+    <!-- Contact & Location -->
+    <div>
+      <div class="footer-col-title">Find Us</div>
+      <div class="footer-info-row">
+        <div class="footer-info-icon">📍</div>
+        <div class="footer-info-text">
+          <a href="https://maps.google.com/?q=8318+Pineville-Matthews+Rd+UNIT+709+Charlotte+NC+28226" target="_blank" rel="noopener">
+            8318 Pineville-Matthews Rd<br/>Unit 709, Charlotte, NC 28226
+          </a><br/>
+          <span style="font-size:.8rem;color:rgba(255,255,255,.35);">McMullen Creek Market</span>
+        </div>
+      </div>
+      <div class="footer-info-row">
+        <div class="footer-info-icon">📞</div>
+        <div class="footer-info-text">
+          <a href="tel:+19809497777">(980) 949-7777</a>
+        </div>
+      </div>
+      <div class="footer-info-row">
+        <div class="footer-info-icon">📸</div>
+        <div class="footer-info-text">
+          <a href="https://www.instagram.com/alonaillounge/" target="_blank" rel="noopener">@alonaillounge</a>
+        </div>
+      </div>
+      <div class="footer-info-row">
+        <div class="footer-info-icon">🌐</div>
+        <div class="footer-info-text">
+          <a href="https://alonaillounge.com" target="_blank" rel="noopener">alonaillounge.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hours -->
+    <div>
+      <div class="footer-col-title">Hours</div>
+      <div class="footer-hours-grid">
+        <span class="footer-hours-day">Mon</span><span class="footer-hours-time">10 AM – 6 PM</span>
+        <span class="footer-hours-day">Tue</span><span class="footer-hours-time">10 AM – 6 PM</span>
+        <span class="footer-hours-day">Wed</span><span class="footer-hours-time">10 AM – 6 PM</span>
+        <span class="footer-hours-day">Thu</span><span class="footer-hours-time">10 AM – 6 PM</span>
+        <span class="footer-hours-day">Fri</span><span class="footer-hours-time">10 AM – 6 PM</span>
+        <span class="footer-hours-day">Sat</span><span class="footer-hours-time">10 AM – 6 PM</span>
+        <span class="footer-hours-day">Sun</span><span class="footer-hours-time closed">Closed</span>
+      </div>
+      <p style="margin-top:16px;font-size:.78rem;color:rgba(255,255,255,.28);font-style:italic;line-height:1.5;">Hours may differ on holidays.<br/>Appointments preferred.</p>
+    </div>
+
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 ALO Nail Lounge &nbsp;·&nbsp; Charlotte, NC &nbsp;·&nbsp; All rights reserved
+  </div>
 </footer>
 
 <!-- ════ QR LIGHTBOX ════ -->
