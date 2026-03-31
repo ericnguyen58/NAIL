@@ -1771,7 +1771,15 @@ function removeService(cat, idx) {
   });
 }
 
-function openAddForm(cat)  { document.getElementById('addForm_' + cat).classList.add('open'); }
+function scrollToForm(id) {
+  const el = document.getElementById(id);
+  if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+}
+
+function openAddForm(cat)  {
+  document.getElementById('addForm_' + cat).classList.add('open');
+  scrollToForm('addForm_' + cat);
+}
 function closeAddForm(cat) { document.getElementById('addForm_' + cat).classList.remove('open'); }
 
 function addPriceRow(cat) {
@@ -1833,6 +1841,7 @@ function openEditForm(cat, idx) {
   }
   document.getElementById('ef_' + cat + '_err').style.display = 'none';
   document.getElementById('editForm_' + cat).classList.add('open');
+  scrollToForm('editForm_' + cat);
 }
 
 function closeEditForm(cat) {
