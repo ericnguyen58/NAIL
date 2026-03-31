@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>ALO Nail Lounge — Services & Pricing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:        #C9A96E;
+      --gold-light:  #E8D5B0;
+      --gold-dark:   #8B6914;
+      --cream:       #FAF6EF;
+      --cream-dark:  #F2EBE0;
+      --rose:        #C4876A;
+      --brown-soft:  #6B4C3B;
+      --text-dark:   #2C1A0E;
+      --text-mid:    #5C3D2A;
+      --text-light:  #9B7B60;
+      --border:      rgba(201,169,110,0.35);
+    }
+
+    html { scroll-behavior: smooth; font-size: 18px; }
+
+    body {
+      background: var(--cream);
+      color: var(--text-dark);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      line-height: 1.8;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(160deg, #1a0f08 0%, #2e1a0d 45%, #3d2410 100%);
+      color: var(--cream);
+      text-align: center;
+      padding: 80px 40px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-ornament {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-bottom: 28px;
+    }
+    .hero-ornament span { display: block; height: 1px; width: 60px; background: var(--gold); opacity: .6; }
+    .hero-ornament svg { width: 24px; height: 24px; fill: var(--gold); opacity: .85; }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 300;
+      letter-spacing: .12em;
+      color: var(--gold-light);
+      line-height: 1.1;
+    }
+    .hero h1 em { font-style: italic; color: #fff; font-weight: 300; }
+    .hero p {
+      margin-top: 18px;
+      font-size: 1rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .8;
+    }
+    .hero-tagline {
+      margin-top: 26px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: rgba(255,255,255,.7);
+      letter-spacing: .04em;
+    }
+
+    /* ─── NAV TABS ─── */
+    .nav-tabs {
+      position: sticky; top: 0; z-index: 100;
+      background: #1e1008;
+      display: flex; justify-content: center; gap: 0;
+      border-bottom: 1px solid rgba(201,169,110,.2);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .nav-tabs a {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 1rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 20px 32px;
+      min-height: 60px;
+      display: flex; align-items: center;
+      white-space: nowrap;
+      transition: color .2s, background .2s;
+      border-bottom: 3px solid transparent;
+    }
+    .nav-tabs a:hover { color: #fff; background: rgba(201,169,110,.08); border-bottom-color: var(--gold); }
+    .nav-tabs a:active { background: rgba(201,169,110,.18); color: #fff; }
+
+    /* ─── LAYOUT ─── */
+    .page { max-width: 1060px; margin: 0 auto; padding: 0 36px 100px; }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      text-align: center;
+      padding: 70px 0 48px;
+    }
+    .section-header .eyebrow {
+      font-size: .9rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .section-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.15;
+    }
+    .section-header .divider {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      margin-top: 22px;
+    }
+    .section-header .divider span { display: block; height: 1px; width: 50px; background: var(--gold); opacity: .5; }
+    .section-header .divider i { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); display: block; }
+
+    /* ─── CATEGORY TITLE ─── */
+    .cat-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--brown-soft);
+      margin: 52px 0 6px;
+      display: flex; align-items: center; gap: 14px;
+      justify-content: center;
+      text-align: center;
+    }
+    .cat-title::before, .cat-title::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .cat-desc {
+      font-size: .95rem;
+      color: var(--text-mid);
+      letter-spacing: .03em;
+      margin-bottom: 22px;
+      text-align: center;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-style: italic;
+    }
+
+    /* ─── SERVICE CARD ─── */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-bottom: 10px;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      position: relative;
+      transition: box-shadow .22s, transform .22s;
+      width: 100%;
+      text-align: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .service-card:active {
+      transform: scale(0.975);
+      box-shadow: 0 4px 16px rgba(139,105,20,.08);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+      border-radius: 16px 16px 0 0;
+    }
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      letter-spacing: .02em;
+      margin-bottom: 12px;
+    }
+    .service-desc {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .price-list { list-style: none; }
+    .price-list li {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(201,169,110,.2);
+      font-size: 1rem;
+      color: var(--text-mid);
+      letter-spacing: .03em;
+      min-height: 48px;
+    }
+    .price-list li:last-child { border-bottom: none; }
+    .price-list .label { text-transform: uppercase; font-size: .92rem; letter-spacing: .07em; color: var(--text-dark); font-weight: 500; }
+    .price-list .price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+      white-space: nowrap;
+      margin-left: 12px;
+    }
+
+    /* ─── MANI / PEDI FULL-WIDTH CARD ─── */
+    .service-card.wide {
+      grid-column: 1 / -1;
+    }
+    .wide-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 40px;
+    }
+    @media (max-width: 600px) { .wide-inner { grid-template-columns: 1fr; } }
+
+    /* ─── PAMPER HIGHLIGHT ─── */
+    .service-card.highlight {
+      background: linear-gradient(135deg, #fff9f0 0%, #fff 100%);
+      border-color: var(--gold);
+    }
+
+    /* ─── SCENTS BAND ─── */
+    .scents-band {
+      background: linear-gradient(135deg, #2e1a0d, #1a0f08);
+      border-radius: 4px;
+      padding: 32px 40px;
+      margin-top: 16px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+      text-align: center;
+    }
+    .scents-band .label-col .eyebrow {
+      font-size: .85rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); opacity: .85;
+    }
+    .scents-band .label-col h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 400; color: var(--gold-light); margin-top: 6px;
+    }
+    .scents-list {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .scent-pill {
+      border: 1px solid rgba(201,169,110,.4);
+      border-radius: 30px;
+      padding: 14px 28px;
+      font-size: 1rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      background: rgba(201,169,110,.06);
+      min-height: 52px;
+      display: flex; align-items: center;
+    }
+
+    /* ─── ADD-ONS ─── */
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .addon-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 1rem;
+      color: var(--text-dark);
+      font-weight: 500;
+      letter-spacing: .02em;
+      min-height: 64px;
+      gap: 12px;
+    }
+    .addon-item .price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--gold-dark);
+      white-space: nowrap;
+    }
+
+    /* ─── NOTE BANNER ─── */
+    .note-banner {
+      background: var(--cream-dark);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 4px 4px 0;
+      padding: 18px 24px;
+      font-size: 1rem;
+      color: var(--text-mid);
+      font-style: italic;
+      margin: 28px 0;
+      line-height: 1.8;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #1a0f08;
+      color: rgba(255,255,255,.55);
+      text-align: center;
+      padding: 44px 20px;
+      font-size: .95rem;
+      letter-spacing: .08em;
+    }
+    footer strong { color: var(--gold); font-weight: 400; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; }
+
+    /* ─── SEPARATOR ─── */
+    .section-sep {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 10px 0 0;
+    }
+
+    /* ─── 2×2 QUAD BLOCK ─── */
+    .quad-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows:    repeat(2, 1fr);
+      gap: 0;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 32px;
+    }
+    /* inner borders between all 6 cells (2 cols × 3 rows) */
+    .quad-card {
+      border-radius: 0 !important;
+      border: none !important;
+      border-right:  1.5px solid var(--border) !important;
+      border-bottom: 1.5px solid var(--border) !important;
+    }
+    /* remove right border on every second card (right column) */
+    .quad-card:nth-child(2n)   { border-right: none !important; }
+    /* remove bottom border on last row (cards 5 & 6) */
+    .quad-card:nth-child(n+5)  { border-bottom: none !important; }
+    /* override the top gold bar radius */
+    .quad-card::before { border-radius: 0 !important; }
+    /* outer corner radii */
+    .quad-card:nth-child(1) { border-radius: 20px 0 0 0 !important; }
+    .quad-card:nth-child(2) { border-radius: 0 20px 0 0 !important; }
+    .quad-card:nth-child(5) { border-radius: 0 0 0 20px !important; }
+    .quad-card:nth-child(6) { border-radius: 0 0 20px 0 !important; }
+
+    .quad-tag {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      letter-spacing: .02em;
+      margin-bottom: 4px;
+    }
+    .quad-desc {
+      font-size: .88rem;
+      color: var(--text-light);
+      font-style: italic;
+      margin-bottom: 18px;
+      letter-spacing: .02em;
+    }
+
+    /* ─── iPad portrait (up to 820px) ─── */
+    @media (max-width: 860px) {
+      .page { padding: 0 28px 100px; }
+      .service-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .addons-grid  { grid-template-columns: repeat(2, 1fr); }
+      .modal-inner  { padding: 44px 36px 40px; }
+    }
+
+    /* ─── iPad landscape: give 3 cols to enhancements ─── */
+    @media (min-width: 900px) {
+      /* keep 2-col for mani/pedi, 3-col auto for enhancements with many cards */
+      .service-grid.enhancements-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ─── phone ─── */
+    @media (max-width: 560px) {
+      html { font-size: 16px; }
+      .nav-tabs a { padding: 16px 14px; font-size: .85rem; letter-spacing: .06em; }
+      .page { padding: 0 18px 80px; }
+      .service-grid, .addons-grid { grid-template-columns: 1fr; }
+      .quad-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .quad-card:nth-child(1) { border-radius: 20px 20px 0 0 !important; }
+      .quad-card:nth-child(2),
+      .quad-card:nth-child(3),
+      .quad-card:nth-child(4),
+      .quad-card:nth-child(5) { border-radius: 0 !important; }
+      .quad-card:nth-child(6) { border-radius: 0 0 20px 20px !important; border-bottom: none !important; }
+      .quad-card { border-right: none !important; }
+      .quad-card:nth-child(n+5) { border-bottom: 1.5px solid var(--border) !important; }
+      .quad-card:nth-child(6)   { border-bottom: none !important; }
+      .modal-inner  { padding: 32px 22px 28px; }
+      .modal-title  { font-size: 1.9rem; }
+      .scent-pill   { padding: 12px 20px; }
+    }
+
+    /* ─── CLICKABLE CARD HINT ─── */
+    .service-card.expandable {
+      cursor: pointer;
+    }
+    .service-card.expandable::after {
+      content: '✦  Tap for details';
+      display: block;
+      margin-top: 18px;
+      font-size: .82rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .75;
+    }
+    .service-card.expandable:active::after { opacity: 1; }
+
+    /* ─── BACKDROP ─── */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      /* backdrop */
+      background: rgba(15, 8, 3, 0);
+      backdrop-filter: blur(0px) saturate(100%);
+      -webkit-backdrop-filter: blur(0px) saturate(100%);
+      /* hidden by default via pointer-events + opacity */
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        background   0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        backdrop-filter 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity      0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+      background: rgba(15, 8, 3, 0.48);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+    }
+
+    /* ─── MODAL BOX ─── */
+    .modal-box {
+      background: rgba(252, 247, 240, 0.97);
+      border-radius: 24px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+      border: 1px solid rgba(201,169,110,0.3);
+      box-shadow:
+        0 2px 4px rgba(0,0,0,.04),
+        0 8px 24px rgba(0,0,0,.10),
+        0 40px 80px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.8);
+      transform: scale(0.82) translateY(16px);
+      opacity: 0;
+      transition:
+        transform 0.52s cubic-bezier(0.34, 1.48, 0.64, 1),
+        opacity   0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .modal-backdrop.open .modal-box {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    .modal-inner { padding: 48px 52px 44px; }
+
+    /* closing state */
+    .modal-backdrop.closing {
+      opacity: 0;
+      background: rgba(15, 8, 3, 0);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      transition:
+        background      0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        backdrop-filter 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity         0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .modal-backdrop.closing .modal-box {
+      transform: scale(0.88) translateY(10px);
+      opacity: 0;
+      transition:
+        transform 0.28s cubic-bezier(0.55, 0, 1, 0.45),
+        opacity   0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .modal-close {
+      position: absolute; top: 18px; right: 18px;
+      background: rgba(201,169,110,.15);
+      border: none;
+      font-size: 1rem; line-height: 1;
+      color: var(--text-mid);
+      cursor: pointer;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      transition: background .18s, color .18s, transform .18s;
+    }
+    .modal-close:active {
+      background: rgba(201,169,110,.32);
+      color: var(--text-dark);
+      transform: scale(0.92);
+    }
+
+    .modal-eyebrow {
+      font-size: .8rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px;
+    }
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .modal-price-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 700;
+      padding: 6px 22px;
+      border-radius: 30px;
+      margin: 14px 0 24px;
+      letter-spacing: .04em;
+    }
+    .modal-divider {
+      height: 1px; background: var(--border);
+      margin: 20px 0;
+    }
+    .modal-subtitle {
+      font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold-dark); margin-bottom: 14px; font-weight: 600;
+    }
+    .modal-includes {
+      list-style: none; padding: 0;
+    }
+    .modal-includes li {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(201,169,110,.15);
+      font-size: 1.05rem; color: var(--text-dark); line-height: 1.6;
+      min-height: 52px;
+    }
+    .modal-includes li:last-child { border-bottom: none; }
+    .modal-includes li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: .7rem;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .modal-note {
+      margin-top: 24px;
+      background: var(--cream-dark);
+      border-left: 3px solid var(--gold);
+      padding: 14px 18px;
+      border-radius: 0 4px 4px 0;
+      font-size: .9rem;
+      color: var(--text-mid);
+      font-style: italic;
+      line-height: 1.7;
+    }
+    /* ─── PAGE SECTION TOGGLE ─── */
+    .page-section { padding-bottom: 60px; }
+
+    /* ─── STAFF GRID ─── */
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .staff-empty {
+      grid-column: 1/-1;
+      text-align: center;
+      color: var(--text-light);
+      font-style: italic;
+      font-size: 1rem;
+      padding: 48px 0;
+    }
+    .staff-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .staff-card-header {
+      background: linear-gradient(135deg, #2e1a0d, #1a0f08);
+      padding: 28px 20px 20px;
+    }
+    .staff-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 600;
+      color: #fff;
+      margin: 0 auto 12px;
+      border: 2px solid rgba(201,169,110,.4);
+    }
+    .staff-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600;
+      color: var(--gold-light);
+    }
+    .staff-role {
+      font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.4); margin-top: 4px;
+    }
+    .staff-qr-row {
+      display: flex; gap: 0;
+      border-top: 1px solid var(--border);
+    }
+    .staff-qr-col {
+      flex: 1; padding: 20px 16px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .staff-qr-col:first-child { border-right: 1px solid var(--border); }
+    .staff-qr-label {
+      font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--text-light); font-weight: 500;
+    }
+    .staff-qr-img {
+      width: 110px; height: 110px;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .staff-qr-handle {
+      font-size: .85rem; color: var(--gold-dark); font-weight: 600;
+    }
+    .staff-qr-placeholder {
+      width: 110px; height: 110px;
+      border-radius: 8px;
+      border: 1.5px dashed var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .72rem; color: var(--text-light); font-style: italic;
+    }
+
+    /* ─── ADMIN STYLES ─── */
+    .admin-gate-box {
+      max-width: 400px; margin: 0 auto;
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px 36px;
+      text-align: center;
+    }
+    .admin-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 36px;
+    }
+    .admin-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600;
+      color: var(--text-dark); margin-bottom: 24px;
+    }
+    .admin-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .admin-field { display: flex; flex-direction: column; gap: 7px; }
+    .admin-label {
+      font-size: .82rem; font-weight: 600;
+      letter-spacing: .07em; text-transform: uppercase;
+      color: var(--text-mid);
+    }
+    .admin-hint-inline { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--text-light); }
+    .admin-input {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-dark);
+      background: var(--cream);
+      outline: none;
+      min-height: 50px;
+      transition: border-color .2s;
+    }
+    .admin-input:focus { border-color: var(--gold); background: #fff; }
+    .qr-upload-area {
+      border: 1.5px dashed var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      cursor: pointer;
+      min-height: 80px; justify-content: center;
+      background: var(--cream);
+      transition: border-color .2s, background .2s;
+      font-size: .85rem; color: var(--text-light); font-style: italic;
+    }
+    .qr-upload-area:active { border-color: var(--gold); background: #fff8f0; }
+    .admin-form-actions {
+      display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;
+    }
+    .admin-btn-primary {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: #fff; border: none; border-radius: 12px;
+      padding: 14px 32px; font-size: 1rem;
+      font-family: 'Montserrat', sans-serif; font-weight: 500;
+      cursor: pointer; min-height: 50px;
+      transition: opacity .2s, transform .15s;
+    }
+    .admin-btn-primary:active { opacity: .85; transform: scale(.97); }
+    .admin-btn-ghost {
+      background: none; color: var(--text-mid);
+      border: 1.5px solid var(--border); border-radius: 12px;
+      padding: 14px 28px; font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer; min-height: 50px;
+      transition: border-color .2s, color .2s;
+    }
+    .admin-btn-ghost:active { border-color: var(--gold-dark); color: var(--text-dark); }
+    .admin-error {
+      background: #fff0f0; border: 1px solid #f5c0c0;
+      border-radius: 8px; padding: 10px 14px;
+      font-size: .9rem; color: #b03030;
+      margin-bottom: 14px; text-align: left;
+    }
+    .admin-hint {
+      font-size: .85rem; color: var(--text-light);
+      font-style: italic; margin-top: 16px;
+    }
+    .req { color: var(--rose); }
+
+    /* staff row in admin list */
+    .admin-staff-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .admin-staff-row:last-child { border-bottom: none; }
+    .admin-staff-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--gold); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 600; flex-shrink: 0;
+    }
+    .admin-staff-info { flex: 1; }
+    .admin-staff-name { font-weight: 600; font-size: 1rem; color: var(--text-dark); }
+    .admin-staff-meta { font-size: .82rem; color: var(--text-light); margin-top: 2px; }
+    .admin-row-actions { display: flex; gap: 8px; }
+    .admin-action-btn {
+      border: 1px solid var(--border); background: var(--cream);
+      border-radius: 8px; padding: 8px 16px;
+      font-size: .82rem; color: var(--text-mid);
+      cursor: pointer; font-family: 'Montserrat', sans-serif;
+      min-height: 38px; transition: background .15s, color .15s;
+    }
+    .admin-action-btn:active { background: var(--cream-dark); }
+    .admin-action-btn.del { color: #b03030; border-color: #f5c0c0; }
+    .admin-action-btn.del:active { background: #fff0f0; }
+
+    /* ─── ADMIN SUB-TABS ─── */
+    .admin-subtabs {
+      display: flex; gap: 0;
+      border: 1.5px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .admin-subtab {
+      flex: 1; padding: 16px;
+      background: var(--cream); border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .92rem; font-weight: 500;
+      letter-spacing: .05em;
+      color: var(--text-light);
+      cursor: pointer; min-height: 52px;
+      transition: background .2s, color .2s;
+      border-right: 1.5px solid var(--border);
+    }
+    .admin-subtab:last-child { border-right: none; }
+    .admin-subtab.active {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: #fff;
+    }
+
+    /* ─── PRICE EDITOR ─── */
+    .price-edit-section { margin-bottom: 28px; }
+    .price-edit-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--brown-soft);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .price-edit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .price-edit-row { display: flex; flex-direction: column; gap: 5px; }
+    .price-edit-row label {
+      font-size: .78rem; font-weight: 600; letter-spacing: .07em;
+      text-transform: uppercase; color: var(--text-mid);
+    }
+
+    @media (max-width: 640px) {
+      .admin-form-grid { grid-template-columns: 1fr; }
+      .staff-grid { grid-template-columns: 1fr; }
+      .price-edit-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* gold bar at top of modal */
+    .modal-box::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+      border-radius: 20px 20px 0 0;
+    }
+
+    @media (max-width: 560px) {
+      .modal-inner { padding: 32px 22px 28px; }
+      .modal-title { font-size: 1.9rem; }
+    }
+
+    /* ─── SERVICE MANAGER (admin) ─── */
+    .svc-manager-card { background:#fff; border:1px solid var(--border); border-radius:16px; padding:28px 28px; margin-bottom:16px; }
+    .svc-manager-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; flex-wrap:wrap; gap:10px; }
+    .svc-manager-title { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:600; color:var(--text-dark); }
+    .svc-item-row { display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid rgba(201,169,110,.15); flex-wrap:wrap; }
+    .svc-item-row:last-child { border-bottom:none; }
+    .svc-item-name { flex:1; font-size:1rem; font-weight:500; color:var(--text-dark); min-width:120px; }
+    .svc-item-prices { display:flex; flex-direction:column; gap:4px; flex:2; }
+    .svc-price-row { display:flex; gap:8px; align-items:center; }
+    .svc-price-row input { flex:1; min-width:0; }
+    .svc-price-label { font-size:.75rem; color:var(--text-light); min-width:90px; text-align:right; }
+    .svc-add-form { background:var(--cream); border:1.5px dashed var(--border); border-radius:12px; padding:20px; margin-top:16px; display:none; }
+    .svc-add-form.open { display:block; }
+    .svc-add-price-list { display:flex; flex-direction:column; gap:8px; margin:12px 0; }
+    .svc-add-price-entry { display:grid; grid-template-columns:1fr 1fr auto; gap:8px; align-items:center; }
+    .svc-add-price-entry button { background:none; border:1px solid #f5c0c0; color:#b03030; border-radius:8px; padding:8px 10px; cursor:pointer; font-size:.85rem; min-height:40px; }
+    .admin-btn-sm { border:1px solid var(--border); background:var(--cream); border-radius:8px; padding:8px 14px; font-size:.82rem; color:var(--text-mid); cursor:pointer; font-family:'Montserrat',sans-serif; min-height:38px; white-space:nowrap; }
+    .admin-btn-sm:active { background:var(--cream-dark); }
+    .admin-btn-sm.danger { color:#b03030; border-color:#f5c0c0; }
+    .admin-btn-sm.danger:active { background:#fff0f0; }
+    .admin-save-banner { background:var(--cream-dark); border-left:3px solid var(--gold); border-radius:0 8px 8px 0; padding:12px 16px; font-size:.9rem; color:var(--gold-dark); margin-top:16px; display:none; }
+
+    /* ─── CUSTOM CONFIRM DIALOG ─── */
+    .confirm-backdrop {
+      position: fixed; inset: 0; z-index: 400;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      background: rgba(15, 8, 3, 0);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.22s, background 0.22s, backdrop-filter 0.22s;
+    }
+    .confirm-backdrop.open {
+      opacity: 1; pointer-events: auto;
+      background: rgba(15, 8, 3, 0.55);
+      backdrop-filter: blur(14px) saturate(150%);
+      -webkit-backdrop-filter: blur(14px) saturate(150%);
+    }
+    .confirm-box {
+      position: relative; overflow: hidden;
+      background: rgba(252, 247, 240, 0.97);
+      border-radius: 20px;
+      max-width: 380px; width: 100%;
+      padding: 36px 32px 28px;
+      border: 1px solid rgba(201,169,110,0.4);
+      box-shadow: 0 8px 40px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.8);
+      text-align: center;
+      transform: scale(0.88) translateY(8px);
+      transition: transform 0.32s cubic-bezier(0.34, 1.48, 0.64, 1), opacity 0.22s;
+    }
+    .confirm-backdrop.open .confirm-box { transform: scale(1) translateY(0); }
+    .confirm-box::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+      border-radius: 20px 20px 0 0;
+    }
+    .confirm-icon { font-size: 1.9rem; margin-bottom: 10px; }
+    .confirm-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 600;
+      color: var(--text-dark); margin-bottom: 8px;
+    }
+    .confirm-msg {
+      font-size: .93rem; color: var(--text-mid);
+      line-height: 1.65; margin-bottom: 24px; font-style: italic;
+    }
+    .confirm-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-ornament">
+    <span></span>
+    <svg viewBox="0 0 24 24"><path d="M12 2C6 8 4 10 4 13a8 8 0 0016 0c0-3-2-5-8-11z"/></svg>
+    <span></span>
+  </div>
+  <h1 id="adminTrigger" style="user-select:none;-webkit-user-select:none;">ALO <em>Nail Lounge</em></h1>
+  <p>Nail Services &amp; Pricing</p>
+  <div class="hero-tagline">Crafted with care — for couples, families &amp; every occasion</div>
+</section>
+
+<!-- NAV -->
+<nav class="nav-tabs">
+  <a href="#nail-enhancements">Nail Enhancements</a>
+  <a href="#manicure">Manicure</a>
+  <a href="#pedicure">Pedicure</a>
+  <a href="#addons">Add-Ons</a>
+  <a href="#" id="tipTabBtn">Gratuity</a>
+</nav>
+
+<div class="page">
+
+  <!-- ════════════════════════════
+       NAIL ENHANCEMENTS
+  ═══════════════════════════════ -->
+  <div id="nail-enhancements" class="section-header">
+    <div class="eyebrow">Our Signature Services</div>
+    <h2>Nail Enhancements</h2>
+    <div class="divider"><span></span><i></i><span></span></div>
+  </div>
+
+  <div class="note-banner">
+    We only use nail products that are approved. All prices are subject to additional charges depending on length, design complexity, or removal needs.
+  </div>
+
+  <!-- DYNAMIC ENHANCEMENTS -->
+  <div id="enhancementContainer"></div>
+
+  <hr class="section-sep"/>
+
+  <!-- ════════════════════════════
+       MANICURE
+  ═══════════════════════════════ -->
+  <div id="manicure" class="section-header">
+    <div class="eyebrow">Hand Care</div>
+    <h2>Manicure</h2>
+    <div class="divider"><span></span><i></i><span></span></div>
+  </div>
+  <div id="maniContainer" class="service-grid"></div>
+
+  <hr class="section-sep" style="margin-top:40px"/>
+
+  <!-- ════════════════════════════
+       PEDICURE
+  ═══════════════════════════════ -->
+  <div id="pedicure" class="section-header">
+    <div class="eyebrow">Foot Care</div>
+    <h2>Pedicure</h2>
+    <div class="divider"><span></span><i></i><span></span></div>
+  </div>
+  <div id="pediContainer" class="service-grid"></div>
+
+  <!-- SCENTS BAND -->
+  <div class="scents-band">
+    <div class="label-col">
+      <div class="eyebrow">Personalize Your Experience</div>
+      <h3>Scents for Your Pedi — Pick One of the Options</h3>
+    </div>
+    <div class="scents-list">
+      <div class="scent-pill">Lavender</div>
+      <div class="scent-pill">Lemongrass</div>
+      <div class="scent-pill">Green Tea</div>
+      <div class="scent-pill">Aloe Vera</div>
+    </div>
+  </div>
+
+  <hr class="section-sep" style="margin-top:48px"/>
+
+  <!-- ════════════════════════════
+       ADD-ONS
+  ═══════════════════════════════ -->
+  <div id="addons" class="section-header">
+    <div class="eyebrow">Customize Your Service</div>
+    <h2>Add-Ons</h2>
+    <div class="divider"><span></span><i></i><span></span></div>
+  </div>
+  <div id="addonsContainer" class="addons-grid"></div>
+
+  <div class="note-banner" style="margin-top:32px">
+    All prices are starting prices. Final cost may vary based on length, design complexity, nail condition, or additional services requested. Please speak with your technician for a personalized quote.
+  </div>
+
+  <!-- ════════════════════════════
+       TIP STAFF
+  ═══════════════════════════════ -->
+  <div id="tip-staff" class="page-section" style="display:none">
+    <div class="section-header">
+      <div class="eyebrow">Show Your Appreciation</div>
+      <h2>Tip Your Technician</h2>
+      <div class="divider"><span></span><i></i><span></span></div>
+    </div>
+    <p style="text-align:center;color:var(--text-light);font-style:italic;font-size:1rem;margin-bottom:36px;">Scan a QR code below to send a tip via Venmo or CashApp.</p>
+    <div id="staffGrid" class="staff-grid">
+      <div class="staff-empty">No staff added yet. Ask your admin to set up tip profiles.</div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════
+       ADMIN PANEL
+  ═══════════════════════════════ -->
+  <div id="admin-panel" class="page-section" style="display:none">
+
+    <!-- PASSWORD GATE -->
+    <div id="adminGate">
+      <div class="section-header">
+        <div class="eyebrow">Restricted Access</div>
+        <h2>Admin Login</h2>
+        <div class="divider"><span></span><i></i><span></span></div>
+      </div>
+      <div class="admin-gate-box">
+        <label class="admin-label">Password</label>
+        <input type="password" id="adminPwInput" class="admin-input" placeholder="Enter admin password" autocomplete="current-password"/>
+        <div id="adminPwError" class="admin-error" style="display:none">Incorrect password. Try again.</div>
+        <button class="admin-btn-primary" style="margin-top:16px" onclick="checkAdminPw()">Unlock</button>
+        <p class="admin-hint">Default password: <strong>alo2024</strong> — change it inside the panel.</p>
+      </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="adminDash" style="display:none">
+      <div class="section-header">
+        <div class="eyebrow">Admin Panel</div>
+        <h2>Manage</h2>
+        <div class="divider"><span></span><i></i><span></span></div>
+      </div>
+
+      <!-- ADMIN SUB-TABS -->
+      <div class="admin-subtabs">
+        <button class="admin-subtab active" onclick="switchAdminTab('staff',this)">Staff &amp; Gratuity</button>
+        <button class="admin-subtab" onclick="switchAdminTab('prices',this)">Prices &amp; Services</button>
+      </div>
+
+      <!-- ── PRICES & SERVICES PANEL ── -->
+      <div id="adminPricesPanel" style="display:none">
+        <!-- sub-category tabs -->
+        <div class="admin-subtabs" style="margin-bottom:20px">
+          <button class="admin-subtab active" onclick="switchSvcTab('enhancements',this)">Enhancements</button>
+          <button class="admin-subtab" onclick="switchSvcTab('manicure',this)">Manicure</button>
+          <button class="admin-subtab" onclick="switchSvcTab('pedicure',this)">Pedicure</button>
+          <button class="admin-subtab" onclick="switchSvcTab('addons',this)">Add-Ons</button>
+        </div>
+        <div id="svcPanelEnhancements"></div>
+        <div id="svcPanelManicure"    style="display:none"></div>
+        <div id="svcPanelPedicure"    style="display:none"></div>
+        <div id="svcPanelAddons"      style="display:none"></div>
+      </div>
+
+      <!-- ── STAFF PANEL ── -->
+      <div id="adminStaffPanel">
+
+      <!-- ADD / EDIT FORM -->
+      <div class="admin-card" id="staffForm">
+        <div class="admin-card-title" id="formTitle">Add New Technician</div>
+        <input type="hidden" id="editId"/>
+        <div class="admin-form-grid">
+          <div class="admin-field">
+            <label class="admin-label">Full Name <span class="req">*</span></label>
+            <input type="text" id="fName" class="admin-input" placeholder="e.g. Sarah"/>
+          </div>
+          <div class="admin-field">
+            <label class="admin-label">Role / Title</label>
+            <input type="text" id="fRole" class="admin-input" placeholder="e.g. Senior Nail Tech"/>
+          </div>
+          <div class="admin-field">
+            <label class="admin-label">Venmo Handle</label>
+            <input type="text" id="fVenmo" class="admin-input" placeholder="@username"/>
+          </div>
+          <div class="admin-field">
+            <label class="admin-label">CashApp Handle</label>
+            <input type="text" id="fCash" class="admin-input" placeholder="$username"/>
+          </div>
+          <div class="admin-field">
+            <label class="admin-label">Venmo QR Code <span class="admin-hint-inline">(image)</span></label>
+            <div class="qr-upload-area" onclick="document.getElementById('fVenmoQR').click()">
+              <img id="fVenmoQRPreview" src="" alt="" style="display:none;width:90px;height:90px;object-fit:contain;border-radius:8px;"/>
+              <span id="fVenmoQRLabel">Tap to upload QR image</span>
+              <input type="file" id="fVenmoQR" accept="image/*" style="display:none" onchange="previewQR(this,'fVenmoQRPreview','fVenmoQRLabel','fVenmoQRData')"/>
+              <input type="hidden" id="fVenmoQRData"/>
+            </div>
+          </div>
+          <div class="admin-field">
+            <label class="admin-label">CashApp QR Code <span class="admin-hint-inline">(image)</span></label>
+            <div class="qr-upload-area" onclick="document.getElementById('fCashQR').click()">
+              <img id="fCashQRPreview" src="" alt="" style="display:none;width:90px;height:90px;object-fit:contain;border-radius:8px;"/>
+              <span id="fCashQRLabel">Tap to upload QR image</span>
+              <input type="file" id="fCashQR" accept="image/*" style="display:none" onchange="previewQR(this,'fCashQRPreview','fCashQRLabel','fCashQRData')"/>
+              <input type="hidden" id="fCashQRData"/>
+            </div>
+          </div>
+        </div>
+        <div id="adminFormError" class="admin-error" style="display:none">Please enter the technician's name.</div>
+        <div class="admin-form-actions">
+          <button class="admin-btn-primary" onclick="saveStaff()">Save Technician</button>
+          <button class="admin-btn-ghost" onclick="cancelEdit()" id="cancelBtn" style="display:none">Cancel</button>
+        </div>
+      </div>
+
+      <!-- STAFF LIST -->
+      <div class="admin-card" style="margin-top:24px">
+        <div class="admin-card-title">Current Technicians</div>
+        <div id="adminStaffList"><div class="staff-empty">No technicians added yet.</div></div>
+      </div>
+
+      <!-- CHANGE PASSWORD -->
+      <div class="admin-card" style="margin-top:24px">
+        <div class="admin-card-title">Change Admin Password</div>
+        <div class="admin-form-grid" style="grid-template-columns:1fr 1fr">
+          <div class="admin-field">
+            <label class="admin-label">New Password</label>
+            <input type="password" id="newPw" class="admin-input" placeholder="New password"/>
+          </div>
+          <div class="admin-field">
+            <label class="admin-label">Confirm Password</label>
+            <input type="password" id="confirmPw" class="admin-input" placeholder="Confirm new password"/>
+          </div>
+        </div>
+        <div id="pwChangeMsg" style="display:none;font-size:.9rem;margin-bottom:12px;margin-top:16px;"></div>
+        <button class="admin-btn-primary" style="margin-top:16px" onclick="changePw()">Update Password</button>
+      </div>
+
+      <div id="staffSaveBanner" class="admin-save-banner" style="margin-top:16px">Saved!</div>
+
+      <div style="text-align:center;margin-top:32px">
+        <button class="admin-btn-ghost" onclick="lockAdmin()">Lock &amp; Exit Admin</button>
+      </div>
+
+      </div><!-- /adminStaffPanel -->
+    </div><!-- /adminDash -->
+  </div><!-- /admin-panel -->
+
+</div><!-- /page -->
+
+<footer>
+  <strong>ALO Nail Lounge</strong><br/>
+  <span style="margin-top:8px; display:block;">Where luxury meets care &nbsp;•&nbsp; Walk-ins welcome &nbsp;•&nbsp; Appointments preferred</span>
+</footer>
+
+<!-- ════ CONFIRM DIALOG ════ -->
+<div class="confirm-backdrop" id="confirmBackdrop">
+  <div class="confirm-box">
+    <div class="confirm-icon">✦</div>
+    <div class="confirm-title" id="confirmTitle">Are you sure?</div>
+    <div class="confirm-msg" id="confirmMsg"></div>
+    <div class="confirm-actions">
+      <button class="admin-btn-primary" onclick="doConfirm()">Confirm</button>
+      <button class="admin-btn-ghost" onclick="closeConfirm()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ MODAL BACKDROP ════ -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="Close">&#x2715;</button>
+    <div class="modal-inner" id="modalInner"></div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════
+   DEFAULT SERVICE DATA
+══════════════════════════════════════ */
+const DEFAULT_SERVICES = {
+  enhancements: [
+    { id:'acrylic',   name:'Acrylic',             desc:'Rock-solid structure, lasts 3–4 wks. Best for length & dramatic looks.',                    items:[{label:'Fill-In',price:'$30+'},{label:'Full Set',price:'$55+'},{label:'Fill-In + Gel',price:'$40+'},{label:'Full Set + Gel',price:'$75+'}] },
+    { id:'hardgel',   name:'Hard Gel',             desc:'Flexible & odor-free, lasts 4–6 wks. Best for natural nail wearers.',                       items:[{label:'Fill-In',price:'$45+'},{label:'Full Set',price:'$65+'},{label:'Fill-In + Gel',price:'$50+'},{label:'Full Set + Gel',price:'$75+'}] },
+    { id:'luminary',  name:'Luminary',             desc:'Lightweight & gentle, lasts 4–5 wks. Best all-rounder for any nail type.',                  items:[{label:'Overlay + Gel',price:'$60+'},{label:'Fill-In + Gel',price:'$65+'},{label:'Full Set + Gel',price:'$75+'}] },
+    { id:'gelx',      name:'Gel X',                desc:'No drilling, no damage, lasts 4–5 wks. Best for a natural, lightweight extension.',         items:[{label:'Full Set + Gel',price:'$60+'}] },
+    { id:'dip',       name:'Dip Powder',           desc:'Chip-free & no UV needed, lasts 3–4 wks. Best for a clean, natural finish.',                items:[{label:'Overlay',price:'$45+'}] },
+    { id:'silk',      name:'SilkWrap / Fiberglass',desc:'Ultra-thin & gentle, lasts 2–3 wks. Best for repair & sensitive nails.',                    items:[{label:'Overlay',price:'$50+'},{label:'Fill-In',price:'$40+'}] },
+  ],
+  manicure: [
+    { id:'mani-classic', name:'The Classic', price:'$25', desc:'A clean classic manicure: filing & shaping, cuticle care, hand scrub, massage, and polish of choice.',                                  highlight:false, modalKey:'classic-mani' },
+    { id:'mani-alo',     name:'Alo Mani',    price:'$45', desc:'An upgrade of The Classic: extended massage, hydrating masque, hot towel wrap, paraffin wax, and aromatherapy.',                        highlight:true,  modalKey:'alo-mani' },
+  ],
+  pedicure: [
+    { id:'pedi-classic', name:'The Classic', price:'$35', desc:'Simple pedicure regimen: soak, nail shaping, cuticle clean-up, callus removal, brief massage, and polish.',                             highlight:false, modalKey:'classic-pedi' },
+    { id:'pedi-pamper',  name:'Pamper Pedi', price:'$55', desc:'Upgrade of The Classic: hydrating & therapeutic paraffin wax, extended massage, hot towel wrap, and premium organic ingredients.',      highlight:true,  modalKey:'pamper-pedi' },
+    { id:'pedi-alo',     name:'Alo Pedi',    price:'$75', desc:'Our signature pedicure — all essentials of the Pamper Pedi in one complete luxury experience.',                                         highlight:true,  modalKey:'alo-pedi' },
+  ],
+  addons: [
+    { id:'addon-nailart',    label:'Nail Art (per nail)',       price:'$5+'  },
+    { id:'addon-french',     label:'French / Ombre',            price:'$10+' },
+    { id:'addon-paraffin',   label:'Paraffin Wax',              price:'$10+' },
+    { id:'addon-gel',        label:'Gel Polish',                price:'$10+' },
+    { id:'addon-repair',     label:'Nail Repair',               price:'$5+'  },
+    { id:'addon-toetip',     label:'Acrylic Toe Tip Add-On',    price:'$5+'  },
+    { id:'addon-takeoff',    label:'Nail Take-Off / Removal',   price:'$15+' },
+    { id:'addon-dip-removal',label:'Dip Powder Soak-Off',       price:'$10+' },
+    { id:'addon-gel-removal',label:'Gel/Powder Soak-Off',       price:'$10+' },
+  ]
+};
+
+/* ══════════════════════════════════════
+   STORAGE
+══════════════════════════════════════ */
+const SVC_KEY   = 'alo_services_v1';
+const STAFF_KEY = 'alo_staff_v1';
+const PW_KEY    = 'alo_admin_pw';
+
+function getServices()      { return JSON.parse(localStorage.getItem(SVC_KEY) || 'null') || JSON.parse(JSON.stringify(DEFAULT_SERVICES)); }
+function saveServices(data) { localStorage.setItem(SVC_KEY, JSON.stringify(data)); }
+function getStaff()         { return JSON.parse(localStorage.getItem(STAFF_KEY) || '[]'); }
+function saveStaffList(arr) { localStorage.setItem(STAFF_KEY, JSON.stringify(arr)); }
+function getPw()            { return localStorage.getItem(PW_KEY) || 'alo2024'; }
+
+/* ══════════════════════════════════════
+   MODAL DATA (built-in rich content)
+══════════════════════════════════════ */
+const modals = {
+  'classic-mani': { eyebrow:'Manicure', title:'The Classic', price:'$25', intro:'A clean, timeless manicure that leaves your hands looking polished and refreshed.', includes:['Nail filing & shaping to your preferred style','Cuticle softening & clean-up','Hand soak & scrub exfoliation','Relaxing hand & arm massage','Regular polish of your choice (or buff to shine)'], note:'Perfect for maintenance visits or a quick refresh before a special occasion.' },
+  'alo-mani':     { eyebrow:'Manicure', title:'Alo Mani',    price:'$45', intro:'An elevated manicure experience designed to deeply nourish and restore your hands.',  includes:['Everything in The Classic Manicure','Extended deep-tissue hand & arm massage','Hydrating masque treatment','Warm paraffin wax dip — seals in moisture','Hot towel wrap to soften skin & open pores','Calming aromatherapy scent selection','Regular or gel polish of your choice'], note:'Ideal for dry or overworked hands — great for couples looking for a relaxing shared experience.' },
+  'classic-pedi': { eyebrow:'Pedicure', title:'The Classic', price:'$35', intro:'A simple yet effective pedicure routine to keep your feet clean, smooth, and refreshed.', includes:['Warm foot soak with cleansing salts','Nail trimming, filing & shaping','Cuticle softening & clean-up','Callus removal & foot scrub','Brief foot & lower leg massage','Regular polish of your choice (or buff)'], note:'A great everyday treatment to maintain healthy, well-groomed feet.' },
+  'pamper-pedi':  { eyebrow:'Pedicure', title:'Pamper Pedi', price:'$55', intro:'An upgrade from The Classic — deeply therapeutic and wonderfully relaxing.', includes:['Everything in The Classic Pedicure','Hydrating & therapeutic paraffin wax dip','Extended foot & calf massage','Hot towel wrap treatment','Premium organic mask or masque','Aromatherapy scent of your choice','Regular or gel polish of your choice'], note:'A favorite for couples — treat yourselves to side-by-side Pamper Pedis together.' },
+  'alo-pedi':     { eyebrow:'Pedicure — Signature', title:'Alo Pedi', price:'$75', intro:'Our ultimate signature pedicure — the full luxury experience from start to finish.', includes:['Everything in the Pamper Pedi','Deep exfoliation & callus removal treatment','Multi-layer hydrating masque','Warm paraffin wax soak','Extended therapeutic massage — foot, calf & knee','Dual hot towel wraps','Premium organic ingredient application','Aromatherapy scent selection','Gel or regular polish of your choice'], note:'The ultimate indulgence — perfect for a special occasion, anniversary, or family day out.' },
+};
+
+/* ══════════════════════════════════════
+   RENDER FUNCTIONS
+══════════════════════════════════════ */
+
+function renderAll() {
+  const svc = getServices();
+  renderEnhancements(svc.enhancements);
+  renderManiPedi('maniContainer', svc.manicure);
+  renderManiPedi('pediContainer', svc.pedicure);
+  renderAddons(svc.addons);
+  // sync modal prices from service data
+  svc.manicure.forEach(s => { if (modals[s.modalKey]) modals[s.modalKey].price = s.price; });
+  svc.pedicure.forEach(s => { if (modals[s.modalKey]) modals[s.modalKey].price = s.price; });
+}
+
+function renderEnhancements(list) {
+  const c = document.getElementById('enhancementContainer');
+  if (!list.length) { c.innerHTML = ''; return; }
+  const cards = list.map((s, i) => {
+    const priceRows = s.items.map(it =>
+      `<li><span class="label">${it.label}</span><span class="price" data-pid="${s.id}-${it.label.replace(/\s+/g,'-').toLowerCase()}">${it.price}</span></li>`
+    ).join('');
+    return `<div class="service-card quad-card" data-qidx="${i}">
+      <div class="quad-tag" data-sid="${s.id}-name">${s.name}</div>
+      <div class="quad-desc">${s.desc}</div>
+      <ul class="price-list">${priceRows}</ul>
+    </div>`;
+  }).join('');
+  c.innerHTML = `<div class="quad-grid">${cards}</div>`;
+  // apply outer-corner border-radius
+  const cols = 2;
+  const qCards = c.querySelectorAll('.quad-card');
+  const n = qCards.length;
+  qCards.forEach((card, i) => {
+    card.style.borderRadius = '0';
+    if (i === 0)           card.style.borderRadius = '20px 0 0 0';
+    if (i === cols - 1)    card.style.borderRadius = '0 20px 0 0';
+    if (i === n - cols && n % cols === 0) card.style.borderRadius = '0 0 0 20px';
+    if (i === n - 1 && n % cols === 0)   card.style.borderRadius = '0 0 20px 0';
+    if (n % cols !== 0 && i === n - 1)   card.style.borderRadius = '0 0 20px 20px';
+  });
+}
+
+function renderManiPedi(containerId, list) {
+  const c = document.getElementById(containerId);
+  c.innerHTML = list.map(s => {
+    const hasModal = !!modals[s.modalKey];
+    const expandClass = hasModal ? 'expandable' : '';
+    const modalAttr   = hasModal ? `data-modal="${s.modalKey}"` : '';
+    return `<div class="service-card ${s.highlight ? 'highlight' : ''} ${expandClass}" ${modalAttr}>
+      <div class="service-name">${s.name}</div>
+      <div class="service-desc">${s.desc}</div>
+      <ul class="price-list">
+        <li><span class="label">${s.name}</span><span class="price" data-pid="${s.id}">${s.price}</span></li>
+      </ul>
+    </div>`;
+  }).join('');
+  // re-bind expandable clicks
+  c.querySelectorAll('.expandable').forEach(card => {
+    card.addEventListener('click', () => openModal(card.dataset.modal));
+  });
+}
+
+function renderAddons(list) {
+  const c = document.getElementById('addonsContainer');
+  c.innerHTML = list.map(s =>
+    `<div class="addon-item"><span>${s.label}</span><span class="price" data-pid="${s.id}">${s.price}</span></div>`
+  ).join('');
+}
+
+/* ══════════════════════════════════════
+   TAB SWITCHING
+══════════════════════════════════════ */
+const tipSection   = document.getElementById('tip-staff');
+const adminSection = document.getElementById('admin-panel');
+
+function showSection(sec) {
+  document.querySelectorAll('.page > *:not(.page-section)').forEach(el => el.style.display = sec ? 'none' : '');
+  [tipSection, adminSection].forEach(s => s.style.display = 'none');
+  if (sec) { sec.style.display = 'block'; window.scrollTo({ top:0, behavior:'smooth' }); }
+}
+
+document.getElementById('tipTabBtn').addEventListener('click', e => {
+  e.preventDefault(); renderStaffGrid(); showSection(tipSection);
+});
+document.querySelectorAll('.nav-tabs a:not(#tipTabBtn)').forEach(a => {
+  a.addEventListener('click', () => showSection(null));
+});
+
+// Long-press salon name to open admin
+(function() {
+  const trigger = document.getElementById('adminTrigger');
+  let timer = null;
+  function startPress() {
+    timer = setTimeout(() => {
+      trigger.style.transition = 'opacity .15s';
+      trigger.style.opacity = '.4';
+      setTimeout(() => { trigger.style.opacity = ''; }, 300);
+      showSection(adminSection);
+      timer = null;
+    }, 1500);
+  }
+  function cancelPress() { clearTimeout(timer); timer = null; }
+  trigger.addEventListener('touchstart',  e => { e.preventDefault(); startPress(); }, { passive:false });
+  trigger.addEventListener('touchend',    cancelPress);
+  trigger.addEventListener('touchmove',   cancelPress);
+  trigger.addEventListener('mousedown',   startPress);
+  trigger.addEventListener('mouseup',     cancelPress);
+  trigger.addEventListener('mouseleave',  cancelPress);
+  trigger.addEventListener('contextmenu', e => e.preventDefault());
+})();
+
+/* ══════════════════════════════════════
+   ADMIN SUB-TABS
+══════════════════════════════════════ */
+function switchAdminTab(tab, btn) {
+  document.querySelectorAll('#adminDash > .admin-subtabs .admin-subtab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('adminStaffPanel').style.display  = tab === 'staff'  ? 'block' : 'none';
+  document.getElementById('adminPricesPanel').style.display = tab === 'prices' ? 'block' : 'none';
+  if (tab === 'prices') renderAllSvcPanels();
+}
+
+function switchSvcTab(cat, btn) {
+  document.querySelectorAll('#adminPricesPanel .admin-subtabs .admin-subtab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['enhancements','manicure','pedicure','addons'].forEach(c => {
+    document.getElementById('svcPanel' + c.charAt(0).toUpperCase() + c.slice(1)).style.display = c === cat ? 'block' : 'none';
+  });
+}
+
+/* ══════════════════════════════════════
+   SERVICE MANAGER RENDER (admin)
+══════════════════════════════════════ */
+function renderAllSvcPanels() {
+  const svc = getServices();
+  renderSvcPanel('enhancements', svc);
+  renderSvcPanel('manicure', svc);
+  renderSvcPanel('pedicure', svc);
+  renderSvcPanel('addons', svc);
+}
+
+function renderSvcPanel(cat, svc) {
+  const panelId = 'svcPanel' + cat.charAt(0).toUpperCase() + cat.slice(1);
+  const panel = document.getElementById(panelId);
+  const list  = svc[cat];
+
+  let html = `<div class="svc-manager-card">
+    <div class="svc-manager-header">
+      <span class="svc-manager-title">${cat.charAt(0).toUpperCase()+cat.slice(1)}</span>
+      <button class="admin-btn-sm" onclick="openAddForm('${cat}')">+ Add Service</button>
+    </div>`;
+
+  if (!list.length) {
+    html += `<p style="color:var(--text-light);font-style:italic;font-size:.95rem;">No services yet.</p>`;
+  } else {
+    list.forEach((s, idx) => {
+      html += `<div class="svc-item-row">`;
+      if (cat === 'addons') {
+        html += `<span class="svc-item-name">${s.label}</span>
+          <div class="svc-item-prices">
+            <div class="svc-price-row">
+              <input class="admin-input" style="max-width:100px" value="${s.price}" onchange="updatePrice('${cat}',${idx},null,'price',this.value)"/>
+            </div>
+          </div>`;
+      } else if (cat === 'manicure' || cat === 'pedicure') {
+        html += `<span class="svc-item-name">${s.name}</span>
+          <div class="svc-item-prices">
+            <div class="svc-price-row">
+              <input class="admin-input" style="max-width:100px" value="${s.price}" onchange="updatePrice('${cat}',${idx},null,'price',this.value)"/>
+            </div>
+          </div>`;
+      } else {
+        // enhancements: multiple items
+        const priceInputs = s.items.map((it, ii) =>
+          `<div class="svc-price-row">
+            <span class="svc-price-label">${it.label}</span>
+            <input class="admin-input" style="max-width:90px" value="${it.price}" onchange="updatePrice('${cat}',${idx},${ii},'price',this.value)"/>
+          </div>`
+        ).join('');
+        html += `<span class="svc-item-name">${s.name}</span><div class="svc-item-prices">${priceInputs}</div>`;
+      }
+      html += `<button class="admin-btn-sm danger" onclick="removeService('${cat}',${idx})">Remove</button>
+      </div>`;
+    });
+  }
+
+  // add form
+  html += `<div class="svc-add-form" id="addForm_${cat}">
+    <div class="admin-card-title" style="font-size:1.1rem;margin-bottom:14px;">New ${cat === 'addons' ? 'Add-On' : 'Service'}</div>
+    ${cat !== 'addons' ? `<div class="admin-field" style="margin-bottom:10px"><label class="admin-label">Name</label><input id="af_${cat}_name" class="admin-input" placeholder="Service name"/></div>
+    <div class="admin-field" style="margin-bottom:10px"><label class="admin-label">Short Description (1 line)</label><input id="af_${cat}_desc" class="admin-input" placeholder="e.g. Lasts 3-4 wks. Best for..."/></div>` : ''}
+    ${cat === 'addons' ? `<div class="admin-field" style="margin-bottom:10px"><label class="admin-label">Label</label><input id="af_${cat}_name" class="admin-input" placeholder="e.g. Nail Art (per nail)"/></div>` : ''}`;
+
+  if (cat === 'enhancements') {
+    html += `<div class="admin-label" style="margin-bottom:8px;margin-top:4px;">Price Rows</div>
+      <div id="af_${cat}_priceList" class="svc-add-price-list">
+        <div class="svc-add-price-entry"><input class="admin-input" placeholder="Label (e.g. Fill-In)"/><input class="admin-input" placeholder="Price (e.g. $30+)"/><button onclick="this.closest('.svc-add-price-entry').remove()">✕</button></div>
+      </div>
+      <button class="admin-btn-sm" style="margin-bottom:12px" onclick="addPriceRow('${cat}')">+ Add Row</button>`;
+  } else {
+    html += `<div class="admin-field" style="margin-bottom:10px"><label class="admin-label">Price</label><input id="af_${cat}_price" class="admin-input" placeholder="e.g. $30"/></div>`;
+  }
+
+  html += `<div class="admin-form-actions">
+      <button class="admin-btn-primary" onclick="confirmAddService('${cat}')">Add</button>
+      <button class="admin-btn-ghost" onclick="closeAddForm('${cat}')">Cancel</button>
+    </div>
+    <div id="af_${cat}_err" class="admin-error" style="display:none;margin-top:10px">Please fill in the required fields.</div>
+  </div>
+  <div class="admin-save-banner" id="saveBanner_${cat}">Saved!</div>
+  </div>`; // close svc-manager-card
+
+  panel.innerHTML = html;
+}
+
+function updatePrice(cat, idx, itemIdx, field, val) {
+  const svc = getServices();
+  if (cat === 'enhancements' && itemIdx !== null) {
+    svc[cat][idx].items[itemIdx][field] = val;
+  } else {
+    svc[cat][idx][field] = val;
+  }
+  saveServices(svc);
+  renderAll();
+  flashBanner('saveBanner_' + cat);
+}
+
+function removeService(cat, idx) {
+  showConfirm('Remove Service', 'This will permanently delete this service. Continue?', () => {
+    const svc = getServices();
+    svc[cat].splice(idx, 1);
+    saveServices(svc);
+    renderAll();
+    renderSvcPanel(cat, svc);
+    flashBanner('saveBanner_' + cat);
+  });
+}
+
+function openAddForm(cat)  { document.getElementById('addForm_' + cat).classList.add('open'); }
+function closeAddForm(cat) { document.getElementById('addForm_' + cat).classList.remove('open'); }
+
+function addPriceRow(cat) {
+  const list = document.getElementById('af_' + cat + '_priceList');
+  const row  = document.createElement('div');
+  row.className = 'svc-add-price-entry';
+  row.innerHTML = `<input class="admin-input" placeholder="Label"/><input class="admin-input" placeholder="Price"/><button onclick="this.closest('.svc-add-price-entry').remove()">✕</button>`;
+  list.appendChild(row);
+}
+
+function confirmAddService(cat) {
+  const svc  = getServices();
+  const nameEl  = document.getElementById('af_' + cat + '_name');
+  const errEl   = document.getElementById('af_' + cat + '_err');
+  const name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { errEl.style.display = 'block'; return; }
+  errEl.style.display = 'none';
+  const id = cat + '_' + Date.now();
+
+  if (cat === 'enhancements') {
+    const rows = [...document.querySelectorAll(`#af_${cat}_priceList .svc-add-price-entry`)];
+    const items = rows.map(r => ({ label: r.children[0].value.trim() || 'Price', price: r.children[1].value.trim() || '$0' })).filter(r => r.label);
+    const desc = document.getElementById('af_' + cat + '_desc').value.trim();
+    svc.enhancements.push({ id, name, desc, items: items.length ? items : [{label:'Price', price:'$0'}] });
+  } else if (cat === 'manicure' || cat === 'pedicure') {
+    const price = document.getElementById('af_' + cat + '_price').value.trim();
+    const desc  = document.getElementById('af_' + cat + '_desc').value.trim();
+    svc[cat].push({ id, name, price: price || '$0', desc, highlight: false });
+  } else {
+    const price = document.getElementById('af_' + cat + '_price').value.trim();
+    svc.addons.push({ id, label: name, price: price || '$0' });
+  }
+
+  saveServices(svc);
+  renderAll();
+  renderSvcPanel(cat, svc);
+  closeAddForm(cat);
+  flashBanner('saveBanner_' + cat);
+}
+
+function flashBanner(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.display = 'block';
+  setTimeout(() => { el.style.display = 'none'; }, 2500);
+}
+
+/* ══════════════════════════════════════
+   ADMIN PASSWORD
+══════════════════════════════════════ */
+function checkAdminPw() {
+  const val = document.getElementById('adminPwInput').value;
+  if (val === getPw()) {
+    document.getElementById('adminGate').style.display = 'none';
+    document.getElementById('adminDash').style.display = 'block';
+    document.getElementById('adminPwInput').value = '';
+    document.getElementById('adminPwError').style.display = 'none';
+    document.getElementById('adminStaffPanel').style.display  = 'block';
+    document.getElementById('adminPricesPanel').style.display = 'none';
+    renderAdminList();
+  } else {
+    document.getElementById('adminPwError').style.display = 'block';
+  }
+}
+document.getElementById('adminPwInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkAdminPw(); });
+
+function lockAdmin() {
+  document.getElementById('adminGate').style.display = 'block';
+  document.getElementById('adminDash').style.display = 'none';
+  showSection(null);
+}
+
+function changePw() {
+  const np = document.getElementById('newPw').value.trim();
+  const cp = document.getElementById('confirmPw').value.trim();
+  const msg = document.getElementById('pwChangeMsg');
+  if (!np) { msg.style.display='block'; msg.style.color='#b03030'; msg.textContent='Password cannot be empty.'; return; }
+  if (np !== cp) { msg.style.display='block'; msg.style.color='#b03030'; msg.textContent='Passwords do not match.'; return; }
+  localStorage.setItem(PW_KEY, np);
+  document.getElementById('newPw').value = '';
+  document.getElementById('confirmPw').value = '';
+  msg.style.display='block'; msg.style.color='var(--gold-dark)'; msg.textContent='Password updated.';
+  setTimeout(() => { msg.style.display='none'; }, 3000);
+}
+
+/* ══════════════════════════════════════
+   QR IMAGE UPLOAD
+══════════════════════════════════════ */
+function previewQR(input, previewId, labelId, dataId) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const max = 300;
+      const ratio = Math.min(max / img.width, max / img.height, 1);
+      canvas.width  = img.width  * ratio;
+      canvas.height = img.height * ratio;
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      const data = canvas.toDataURL('image/jpeg', 0.82);
+      document.getElementById(dataId).value = data;
+      const prev = document.getElementById(previewId);
+      prev.src = data; prev.style.display = 'block';
+      document.getElementById(labelId).textContent = file.name;
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ══════════════════════════════════════
+   STAFF CRUD
+══════════════════════════════════════ */
+function saveStaff() {
+  const name = document.getElementById('fName').value.trim();
+  if (!name) { document.getElementById('adminFormError').style.display = 'block'; return; }
+  document.getElementById('adminFormError').style.display = 'none';
+  const entry = {
+    id:        document.getElementById('editId').value || Date.now().toString(),
+    name,
+    role:      document.getElementById('fRole').value.trim(),
+    venmo:     document.getElementById('fVenmo').value.trim(),
+    cashapp:   document.getElementById('fCash').value.trim(),
+    venmoQR:   document.getElementById('fVenmoQRData').value,
+    cashappQR: document.getElementById('fCashQRData').value,
+  };
+  const list = getStaff();
+  const idx  = list.findIndex(s => s.id === entry.id);
+  if (idx >= 0) list[idx] = entry; else list.push(entry);
+  saveStaffList(list);
+  resetForm();
+  renderAdminList();
+  flashBanner('staffSaveBanner');
+}
+
+function editStaff(id) {
+  const s = getStaff().find(x => x.id === id);
+  if (!s) return;
+  document.getElementById('editId').value = s.id;
+  document.getElementById('fName').value  = s.name;
+  document.getElementById('fRole').value  = s.role || '';
+  document.getElementById('fVenmo').value = s.venmo || '';
+  document.getElementById('fCash').value  = s.cashapp || '';
+  document.getElementById('formTitle').textContent = 'Edit Technician';
+  document.getElementById('cancelBtn').style.display = 'inline-flex';
+  if (s.venmoQR)   { document.getElementById('fVenmoQRData').value=s.venmoQR;   document.getElementById('fVenmoQRPreview').src=s.venmoQR;   document.getElementById('fVenmoQRPreview').style.display='block'; document.getElementById('fVenmoQRLabel').textContent='Uploaded'; }
+  if (s.cashappQR) { document.getElementById('fCashQRData').value=s.cashappQR;  document.getElementById('fCashQRPreview').src=s.cashappQR;  document.getElementById('fCashQRPreview').style.display='block'; document.getElementById('fCashQRLabel').textContent='Uploaded'; }
+  document.getElementById('staffForm').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function deleteStaff(id) {
+  showConfirm('Remove Technician', 'This will permanently remove this technician. Continue?', () => {
+    saveStaffList(getStaff().filter(s => s.id !== id));
+    renderAdminList();
+    flashBanner('staffSaveBanner');
+  });
+}
+
+function cancelEdit() { resetForm(); }
+
+function resetForm() {
+  ['editId','fName','fRole','fVenmo','fCash','fVenmoQRData','fCashQRData'].forEach(id => document.getElementById(id).value = '');
+  ['fVenmoQRPreview','fCashQRPreview'].forEach(id => { const el = document.getElementById(id); el.src=''; el.style.display='none'; });
+  document.getElementById('fVenmoQRLabel').textContent = 'Tap to upload QR image';
+  document.getElementById('fCashQRLabel').textContent  = 'Tap to upload QR image';
+  document.getElementById('formTitle').textContent     = 'Add New Technician';
+  document.getElementById('cancelBtn').style.display   = 'none';
+  document.getElementById('adminFormError').style.display = 'none';
+}
+
+function renderAdminList() {
+  const list = getStaff();
+  const el   = document.getElementById('adminStaffList');
+  if (!list.length) { el.innerHTML = '<div class="staff-empty">No technicians added yet.</div>'; return; }
+  el.innerHTML = list.map(s => `
+    <div class="admin-staff-row">
+      <div class="admin-staff-avatar">${s.name.charAt(0).toUpperCase()}</div>
+      <div class="admin-staff-info">
+        <div class="admin-staff-name">${s.name}</div>
+        <div class="admin-staff-meta">${[s.role, s.venmo, s.cashapp].filter(Boolean).join(' · ') || 'No details yet'}</div>
+      </div>
+      <div class="admin-row-actions">
+        <button class="admin-action-btn" onclick="editStaff('${s.id}')">Edit</button>
+        <button class="admin-action-btn del" onclick="deleteStaff('${s.id}')">Remove</button>
+      </div>
+    </div>`).join('');
+}
+
+/* ══════════════════════════════════════
+   GRATUITY STAFF GRID
+══════════════════════════════════════ */
+function renderStaffGrid() {
+  const list = getStaff();
+  const el   = document.getElementById('staffGrid');
+  if (!list.length) { el.innerHTML = '<div class="staff-empty">No staff added yet. Ask your admin to set up tip profiles.</div>'; return; }
+  el.innerHTML = list.map(s => {
+    const initials = s.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    const venmoCol = `<div class="staff-qr-col"><div class="staff-qr-label">Venmo</div>${s.venmoQR ? `<img class="staff-qr-img" src="${s.venmoQR}" alt="Venmo QR"/>` : '<div class="staff-qr-placeholder">Not set</div>'}${s.venmo ? `<div class="staff-qr-handle">${s.venmo}</div>` : ''}</div>`;
+    const cashCol  = `<div class="staff-qr-col"><div class="staff-qr-label">CashApp</div>${s.cashappQR ? `<img class="staff-qr-img" src="${s.cashappQR}" alt="CashApp QR"/>` : '<div class="staff-qr-placeholder">Not set</div>'}${s.cashapp ? `<div class="staff-qr-handle">${s.cashapp}</div>` : ''}</div>`;
+    return `<div class="staff-card"><div class="staff-card-header"><div class="staff-avatar">${initials}</div><div class="staff-name">${s.name}</div>${s.role ? `<div class="staff-role">${s.role}</div>` : ''}</div><div class="staff-qr-row">${venmoCol}${cashCol}</div></div>`;
+  }).join('');
+}
+
+/* ══════════════════════════════════════
+   MODAL
+══════════════════════════════════════ */
+const backdrop = document.getElementById('modalBackdrop');
+const inner    = document.getElementById('modalInner');
+const closeBtn = document.getElementById('modalClose');
+
+function openModal(key) {
+  const d = modals[key];
+  if (!d) return;
+  inner.innerHTML = `
+    <div class="modal-eyebrow">${d.eyebrow}</div>
+    <div class="modal-title">${d.title}</div>
+    <div class="modal-price-badge">${d.price}</div>
+    <p style="font-size:1rem;color:var(--text-mid);line-height:1.75;margin-bottom:16px;">${d.intro}</p>
+    <div class="modal-divider"></div>
+    <div class="modal-subtitle">What's Included</div>
+    <ul class="modal-includes">${d.includes.map(i => `<li>${i}</li>`).join('')}</ul>
+    <div class="modal-note">${d.note}</div>`;
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  backdrop.classList.remove('open');
+  backdrop.classList.add('closing');
+  document.body.style.overflow = '';
+  setTimeout(() => backdrop.classList.remove('closing'), 300);
+}
+
+closeBtn.addEventListener('click', closeModal);
+backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ══════════════════════════════════════
+   CONFIRM DIALOG
+══════════════════════════════════════ */
+let _confirmCallback = null;
+
+function showConfirm(title, msg, onConfirm) {
+  document.getElementById('confirmTitle').textContent = title;
+  document.getElementById('confirmMsg').textContent   = msg;
+  _confirmCallback = onConfirm;
+  document.getElementById('confirmBackdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeConfirm() {
+  document.getElementById('confirmBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+  _confirmCallback = null;
+}
+
+function doConfirm() {
+  const cb = _confirmCallback;
+  closeConfirm();
+  if (cb) cb();
+}
+
+document.getElementById('confirmBackdrop').addEventListener('click', e => {
+  if (e.target === document.getElementById('confirmBackdrop')) closeConfirm();
+});
+
+/* ══════════════════════════════════════
+   INIT
+══════════════════════════════════════ */
+renderAll();
+</script>
+
+</body>
+</html>
